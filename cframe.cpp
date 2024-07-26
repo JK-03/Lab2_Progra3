@@ -3,9 +3,10 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include <QString>
-#include <bitset>
 #include <string>
 #include <sstream>
+#include <QRegularExpressionValidator>
+#include <QRegularExpression>
 
 cframe::cframe(QWidget *parent)
     : QMainWindow(parent)
@@ -18,6 +19,12 @@ cframe::cframe(QWidget *parent)
 
     //Window
     this->setWindowTitle("Laboratorio #2");
+
+    //Restrincción de Line Edit para Tarjeta
+    QRegularExpression regExp("^\\d{0,16}$");
+    QRegularExpressionValidator *validator = new QRegularExpressionValidator(regExp, this);
+    ui->TE_Tarjeta->setValidator(validator);
+    ui->TE_Tarjeta->setMaxLength(16);
 }
 
 cframe::~cframe()
